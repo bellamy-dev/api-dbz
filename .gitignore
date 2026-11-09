@@ -1,0 +1,10 @@
+# Dragon Ball API Site
+/node_modules
+.env
+.env.local
+.env.*.local
+dist
+dist-ssr
+*.local
+.DS_Store
+.vite

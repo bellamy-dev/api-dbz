@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Univers Dragon Ball — personnages, planètes et transformations via l'API Dragon Ball" />
+    <title>DBZ API • Univers Dragon Ball</title>
+    <link rel="preconnect" href="https://dragonball-api.com" crossorigin />
+    <link rel="modulepreload" href="/src/main.js" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="header">
+        <div class="container header-inner">
+          <a class="logo" href="#/">DBZ <span class="logo-accent">API</span></a>
+          <nav class="nav">
+            <a class="nav-link" href="#/">Personnages</a>
+            <a class="nav-link" href="#/planetes">Planètes</a>
+            <a class="nav-link" href="#/transformations">Transformations</a>
+          </nav>
+        </div>
+      </header>
+
+      <main id="main"></main>
+
+      <footer class="footer">
+        <div class="container">
+          <p>Données fournies par <a href="https://web.dragonball-api.com/documentation" target="_blank" rel="noopener">Dragon Ball API</a> • Site statique généré avec Vite</p>
+        </div>
+      </footer>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
