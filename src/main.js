@@ -7,9 +7,32 @@ const main = document.getElementById('main')
 /* ---------- Helpers ---------- */
 const $ = (html) => {
   const t = document.createElement('template')
-  t.innerHTML = html.trim()
+  t.innerHTML = String(html ?? '').trim()
   return t.content.firstElementChild
 }
+
+/* ---------- Global error handling ---------- */
+function showJsError(err) {
+  console.error(err)
+  main.innerHTML = `
+    <div class="error">
+      <h2>Erreur JavaScript</h2>
+      <p>${escapeHtml(err && err.message ? err.message : String(err))}</p>
+      <button class="btn btn-primary" onclick="location.reload()">Recharger la page</button>
+    </div>`
+}
+
+window.addEventListener('error', (e) => {
+  if (e.filename && e.filename.includes('localhost') === false && !e.filename.includes('vite')) {
+    // éviter le double-affichage si le router gère déjà
+    return
+  }
+  showJsError(new Error(e.message || 'Erreur inconnue'))
+})
+
+window.addEventListener('unhandledrejection', (e) => {
+  showJsError(new Error(e.reason && e.reason.message ? e.reason.message : String(e.reason)))
+})
 
 function escapeHtml(str = '') {
   return str
@@ -376,5 +399,13 @@ function router() {
   renderNotFound()
 }
 
-window.addEventListener('hashchange', router)
-window.addEventListener('load', router)
+const safeRouter = () => {
+  try {
+    router()
+  } catch (e) {
+    showJsError(e)
+  }
+}
+
+window.addEventListener('hashchange', safeRouter)
+window.addEventListener('load', safeRouter)
